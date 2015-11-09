@@ -51,9 +51,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 
 
-# QC thernald config
-PRODUCT_COPY_FILES += device/htc/dlx/configs/thermald.conf:/system/etc/thermald.conf
-
 # Media configs
 PRODUCT_COPY_FILES += device/htc/dlx/configs/AudioBTID.csv:system/etc/AudioBTID.csv
 PRODUCT_COPY_FILES += device/htc/dlx/configs/AudioBTIDnew.csv:system/etc/AudioBTIDnew.csv
@@ -119,6 +116,10 @@ PRODUCT_PACKAGES += \
         libgps.utils \
         gps.msm8960
 
+# HTC Symbols
+PRODUCT_PACKAGES += \
+        libhtc_symbols
+
 # NFC
 PRODUCT_PACKAGES += \
     nfc.msm8960 \
@@ -128,6 +129,10 @@ PRODUCT_PACKAGES += \
     Nfc \
     Tag \
     com.android.nfc_extras
+
+# SSL Compat
+PRODUCT_PACKAGES += \
+    libboringssl-compat
 
 # We have enough space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

@@ -43,7 +43,7 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 #Kernel
 BOARD_KERNEL_BASE := 0x80600000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=dlx user_debug=0 androidboot.bootdevice=msm_sdcc.1
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=dlx user_debug=0
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
 TARGET_KERNEL_CONFIG := cyanogenmod_dlx_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/m7
@@ -85,31 +85,6 @@ BOARD_RIL_CLASS := ../../../device/htc/dlx/ril
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/htc/dlx/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    akmd.te \
-    device.te \
-    drmserver.te \
-    file_contexts \
-    hcheck.te \
-    healthd.te \
-    init.te \
-    mdm_helper.te \
-    mediaserver.te \
-    mm-qcamerad.te \
-    mpdecision.te \
-    netmgrd.te \
-    property_contexts \
-    qmuxd.te \
-    radio.te \
-    recovery.te \
-    surfaceflinger.te \
-    system_server.te \
-    tee.te \
-    thermal-engine.te \
-    thermald.te \
-    vold.te \
-    wpa.te
-
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 
@@ -140,7 +115,8 @@ BOARD_VOLD_MAX_PARTITIONS := 36
 # Charge mode
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/htc_lpm/lpm_mode
 
-# Added for Clockworkmod
+# Recovery
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 TARGET_USERIMAGES_USE_EXT4 := true
