@@ -36,16 +36,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libnetcmdiface
 
-# NFCEE access control
-ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/htc/dlx/configs/nfcee_access.xml
-else
-    NFCEE_ACCESS_PATH := device/htc/dlx/configs/nfcee_access_debug.xml
-endif
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
-    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
+    device/htc/dlx/configs/nfcee_access.xml:system/etc/nfcee_access.xml \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
@@ -100,13 +94,18 @@ PRODUCT_COPY_FILES += \
     device/htc/dlx/idc/projector_input.idc:system/usr/idc/projector_input.idc \
     device/htc/dlx/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
 
+# Art
+PRODUCT_PROPERTY_OVERRIDES += \
+	dalvik.vm.dex2oat-swap=false
+
 # Audio
 PRODUCT_PACKAGES += \
 	audio_amplifier.msm8960
 
 # Camera
 PRODUCT_PACKAGES += \
-	camera.msm8960
+	camera.msm8960 \
+	libshim_camera
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -130,9 +129,9 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras
 
-# SSL Compat
+# Shims
 PRODUCT_PACKAGES += \
-    libboringssl-compat
+    libshim_qcopt
 
 # We have enough space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
